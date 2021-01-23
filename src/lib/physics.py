@@ -19,5 +19,5 @@ class Physics:
             
     def move(self):
         self.timer = 0
-        self.entity.x += self.entity.velocity[0] * self.speed * 32
-        self.entity.y += self.entity.velocity[1] * self.speed * 32
+        self.entity.x += self.entity.velocity[0] * self.speed * self.entity.move_unit
+        self.entity.y += self.entity.velocity[1] * self.speed * self.entity.move_unit

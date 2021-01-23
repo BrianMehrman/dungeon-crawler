@@ -21,6 +21,7 @@ class Entity:
         self.graphics = graphics
         self.timer = 0
         self.direction = (1,0)
+        self.move_unit = 32
 
     def get_frame(self):
         return self.animation.get_frame()

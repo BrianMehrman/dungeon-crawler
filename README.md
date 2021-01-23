@@ -5,6 +5,33 @@
 This rogue like game is designed to be be controlled either through the keyboard 
 or by using a 'bot' created with JavaScript
 
+## requirements
+
+* python 3
+* pipenv
+
+## Install dependencies
+
+```
+pipenv install
+
+```
+
+## Start Game
+
+```
+pipenv run python src/main.py
+```
+
+## Controls
+
+| Key | Descriptions |
+| --- | --- |
+| Up Arrow | Move up |
+| Down Arrow | Move Down |
+| Left Arrow | Move Left |
+| Right Arrow | Move Right |
+
 ## Notes
 
  """
@@ -56,3 +83,5 @@ or by using a 'bot' created with JavaScript
     -- rendering
 
     """
+
+
