@@ -1,16 +1,7 @@
 from lib.entity import Entity
-
+from lib.physics import Physics
+from lib.graphics import Graphics
 class Actor(Entity):
-    def __init__(self, x, y, animation, controller, pyhsics, graphics):
-        super(x, y, animation, controller, physics, graphics)
-        
-        self.speed = speed
-
-    def draw(self, surface):
-        """
-        This method will render the actor on the surface. All actors show have an 
-        object that we can call to render. 
-
-        hmmm, not sure what to call this
-        """
-        self.renderer.draw()
+    def __init__(self, x, y, surface, animation, controller):
+        super().__init__(x, y, animation, controller, Physics(self), Graphics(self, animation, surface))
+       
