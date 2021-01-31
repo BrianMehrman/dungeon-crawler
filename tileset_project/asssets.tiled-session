@@ -1,0 +1,62 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/map-01.tmx",
+    "expandedProjectPaths": [
+        "/Users/brianmehrman/Games"
+    ],
+    "fileStates": {
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/cave-walls.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/ground.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/grounds.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/map-01.tmx": {
+            "scale": 0.63,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 686.5079365079365,
+                "y": 526.984126984127
+            }
+        },
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/zelda-like.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        }
+    },
+    "lastUsedTilesetExportFilter": "JSON tileset files (*.json)",
+    "map.height": 50,
+    "map.lastUsedExportFilter": "CSV files (*.csv)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 32,
+    "map.tileWidth": 32,
+    "map.width": 50,
+    "openFiles": [
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/map-01.tmx",
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/ground.tsx",
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/cave-walls.tsx"
+    ],
+    "project": "asssets.tiled-project",
+    "recentFiles": [
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/cave-walls.tsx",
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/ground.tsx",
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/map-01.tmx",
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/grounds.tsx",
+        "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/zelda-like.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.spacing": 0,
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    }
+}

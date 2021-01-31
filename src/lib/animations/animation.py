@@ -1,4 +1,5 @@
 from lib.navigation import NORTH, SOUTH, EAST, WEST
+from lib.animations.static import Static
 import pygame as pg
 import math
 """
@@ -36,7 +37,7 @@ S_ANIM = 's'
 E_ANIM = 'e'
 W_ANIM = 'w'
 
-class Animation:
+class Animation(Static):
     def __init__(self, img, width, height, animations=None, frame=0, speed=0.125, start_animation=E_ANIM):
         """
         This class must have a sprite sheet with at least one animation
@@ -47,12 +48,10 @@ class Animation:
             clip_lenght: the lenght of the animation
             speed: the speed at which the animation should run.
         """
+        super().__init__(img, 0, 0, width, height)
         self.img = img
-        # self.img.set_colorkey((236, 236, 236))
 
         self.current_animation = start_animation
-        self.width = width
-        self.height = height
         self.frame = frame
         self.speed = speed
         self.timer = 0
@@ -85,16 +84,7 @@ class Animation:
 
     def set_speed(self, speed):
         self.speed = speed
-    
-    def get_rect(self):
-        return pg.Rect(self.get_x(), self.get_y(), self.width, self.height)
-
-    def get_direction(self):
-        return self.direction
-
-    def set_direction(self, direction):
-        self.direction = direction
-
+   
     def get_x(self):
         return self.get_frame() % (self.img.get_width()/self.width) * self.width
 
@@ -107,7 +97,6 @@ class Animation:
         # update animation
         if self.timer >= self.speed:
             self.next_frame()
-
 
     def update_direction(self):
         """

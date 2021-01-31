@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f060243474bb885a5eeaee532ab032b1507427ed8ca16663eab911a24771e548"
+            "sha256": "6a7af1adf386e1116baa5645b432ce8fc138c1b28c2673424333e319433ab198"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -142,6 +142,14 @@
             "index": "pypi",
             "version": "==2.0.1"
         },
+        "pytmx": {
+            "hashes": [
+                "sha256:0c1b07b04f1ebcf1c1ae7dd7f2837d1ef89b7a7b8c546085d0777b5b3d44bd18",
+                "sha256:1c2b06b3da28e24718373e94c63400c1d715a52b60c2f00d9d1c9ce45ac39efa"
+            ],
+            "index": "pypi",
+            "version": "==3.24"
+        },
         "six": {
             "hashes": [
                 "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
@@ -152,10 +160,10 @@
         },
         "youtube-dl": {
             "hashes": [
-                "sha256:8f421ca8394d2529e06225e44ec66538d2a28f6f340c03065776894bf3d24ea6",
-                "sha256:acf74701a31b6c3d06f9d4245a46ba8fb6c378931681177412043c6e8276fee7"
+                "sha256:982ba6d597ffa7abe00da7f0823b49edd49bca95b4ef64059c56a9f89613d9f4",
+                "sha256:d0dc8abd6e89f81171c66d2ffc073eaabf9d5fc6de94e244da36f92a75cc52d7"
             ],
-            "version": "==2021.1.16"
+            "version": "==2021.1.24.1"
         }
     },
     "develop": {}

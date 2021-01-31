@@ -34,54 +34,54 @@ pipenv run python src/main.py
 
 ## Notes
 
- """
-    Actor
-    - controller component
-    -- AI (finite state machine)
-    -- User controller
-    
-    Actor -> Hero
-    Actor -> Enemy
+```
+Actor
+- controller component
+- AI (finite state machine)
+-- User controller
 
-    """
+Actor -> Hero
+Actor -> Enemy
 
-    """
-    Game Play
+```
 
-    - Actions
-    -- Use/Item
-    -- Attack
-    -- Walk
-    -- LOS
-    -- Toss /Throw
+```
+Game Play
 
-    """
+- Actions
+-- Use/Item
+-- Attack
+-- Walk
+-- LOS
+-- Toss /Throw
 
-    """
-    Item System
+```
 
-    - Items
-    -- consumable
-    -- durable/multi-use
-    - Weapons
-    -- short range
-    -- long range (use toss action)
-    -- magic??
-    - Armor
-    --
+```
+Item System
 
-    """
+- Items
+-- consumable
+-- durable/multi-use
+- Weapons
+-- short range
+-- long range (use toss action)
+-- magic??
+- Armor
+--
 
-    """
-    game loops
+```
 
-    -- animation
-    -- movement
-    -- player controls
-    -- attacks
-    -- physics
-    -- rendering
+```
+game loops
 
-    """
+-- animation
+-- movement
+-- player controls
+-- attacks
+-- physics
+-- rendering
+
+```
 
 

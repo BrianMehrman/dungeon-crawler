@@ -9,6 +9,7 @@ verify_ssl = true
 pygame = "*"
 ftransc = "*"
 numpy = "*"
+pytmx = "*"
 
 [requires]
 python_version = "3.8"
