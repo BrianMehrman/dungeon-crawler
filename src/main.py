@@ -86,6 +86,15 @@ def load_tiles(layer):
     
     return entities, collidables
 
+def load_player_data(layer):
+    
+    
+    for obj in layer:
+        if obj.name == 'Start':
+            start_pos = pygame.Vector2(obj.x,obj.y)
+
+    return start_pos
+
 if __name__ == "__main__":
    
     pygame.init()
@@ -96,6 +105,8 @@ if __name__ == "__main__":
 
     last_millis = 0 
     entities = []
+    start_pos = None
+    collidables = []
 
     # TODO: move the code for loading the character skin to some place else
     hero_animations = {
@@ -104,33 +115,38 @@ if __name__ == "__main__":
         S_ANIM: (6,3),
         W_ANIM: (9,3)
     }
-
-    print("Loading hero..")
-    hero_img = 'assets/images/rpgsprites1/warrior_f.png'
-    hero_animation = Animation(load_image(hero_img), 32, 36, hero_animations, random.randint(0, 1), 0.25)
-    hero  = Hero(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2, surface, hero_animation)
-
-    collidables = []
+    
     # load entities from map
-
     # load tiles
     #  -base 
     # - ground
     # - hills ( this layer will have collision)
     # - PlayerData
     map_path = 'assets/tilesets/map-01.tmx'
-
     tiled_map = load_map(map_path)
+    
     for layer in tiled_map.layers:
 
         print("Loading layer %s..." % layer.name) 
 
-        if isinstance(layer,pytmx.TiledTileLayer):
+        if isinstance(layer, pytmx.TiledTileLayer):
             new_entities, new_collidables = load_tiles(layer)
             collidables += new_collidables
             entities += new_entities
+
+        if layer.name == 'PlayerData':
+            start_pos = load_player_data(layer)
         
         print("---")
+
+    print("Loading hero..")
+    hero_img = 'assets/images/rpgsprites1/warrior_f.png'
+    hero_animation = Animation(load_image(hero_img), 32, 36, hero_animations, random.randint(0, 1), 0.1)
+    
+    if start_pos == None:
+        start_pos = pygame.Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2)
+
+    hero  = Hero(start_pos, surface, hero_animation)
 
     map_width = tiled_map.width * tiled_map.tilewidth
     map_height = tiled_map.height * tiled_map.tileheight
@@ -161,7 +177,7 @@ if __name__ == "__main__":
                 sys.exit()
 
         delta_time = last_millis / 1000
-
+        
         camera.update(camera_target)
         
         for control_system in main_systems:

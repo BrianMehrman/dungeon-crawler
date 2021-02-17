@@ -25,7 +25,7 @@ class Entity:
         self.graphics = graphics
         self.colliders = colliders
         self.timer = 0
-        self.direction = (1,0)
+        self.direction = (0,0)
         self.move_unit = 32
         self.rel_x = x
         self.rel_y = y
@@ -53,10 +53,7 @@ class Entity:
         else:
             new_y = y
 
-        if new_y == 0 and new_x == 0:
-            # there is no idle anim yet
-            new_x = 1
-
+      
         self.direction = (new_x, new_y)
 
         # TODO: having to maintain the direction in two places needs to be fixed
