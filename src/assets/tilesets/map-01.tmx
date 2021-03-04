@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="3">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="4">
  <editorsettings>
   <chunksize width="32" height="32"/>
   <export target="../maps/map-01.csv" format="csv"/>
@@ -170,5 +170,8 @@
  </layer>
  <objectgroup id="5" name="PlayerData">
   <object id="2" name="Start" type="HeroSpawn" x="766" y="636.795" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="6" name="LevelData">
+  <object id="3" name="weapon_spawn" type="WeaponSpawn" x="614.317" y="486.112" width="20.118" height="20.7886"/>
  </objectgroup>
 </map>

@@ -55,6 +55,10 @@ def reconstruct_path(came_from, current, draw):
         draw()
 
 def astar_algorithm(draw, grid, start, end):
+    '''
+    choose a grid resolution, build grid out of nodes.
+
+    '''
     count = 0
     open_set = PriorityQueue()
     open_set.put((0, count, start))

@@ -21,11 +21,11 @@
             "scaleInEditor": 3
         },
         "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/map-01.tmx": {
-            "scale": 0.63,
-            "selectedLayer": 2,
+            "scale": 1.49,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 686.5079365079365,
-                "y": 526.984126984127
+                "x": 654.0268456375838,
+                "y": 663.0872483221476
             }
         },
         "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/zelda-like.tsx": {
@@ -46,6 +46,7 @@
         "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/cave-walls.tsx"
     ],
     "project": "asssets.tiled-project",
+    "property.type": "int",
     "recentFiles": [
         "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/cave-walls.tsx",
         "/Users/brianmehrman/python_projects/dungeon-crawler/src/assets/tilesets/ground.tsx",

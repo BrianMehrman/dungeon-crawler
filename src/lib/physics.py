@@ -32,7 +32,6 @@ class Physics:
         if self.timer > self.speed:
             self.move(collidables, delta_time)
 
-
     def move(self, collidables, delta_time):
         
         self.timer = 0

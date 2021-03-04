@@ -5,14 +5,15 @@ from pytmx.util_pygame import load_pygame
 
 from queue import PriorityQueue
 from lib.actors.hero import Hero
-from lib.tiles.tile import Tile
 from lib.animations.animation import Animation, N_ANIM, S_ANIM, E_ANIM, W_ANIM
-from lib.animations.static import Static
 
+from lib.controllers.flow_field import FlowField
+from lib.world.game_map import GameMap
 from lib.systems.ai_system import AiSystem
 from lib.systems.graphics_system import GraphicsSystem
 from lib.systems.physics_system import PhysicsSystem
 from lib.systems.animation_system import AnimationSystem
+
 from lib.views.camera import Camera
 from lib.views.world_view import WorldView
 from lib.views.hud import Hud
@@ -30,9 +31,6 @@ def load_image(file_name):
     lfile = local_file(file_name)
     print(lfile)
     return pygame.image.load(lfile)
-
-def load_map(file_path):
-    return load_pygame(local_file(file_path))
 
 def draw_debug(surface, font, gamedata):
     pos_text = "x={0}  y={1}"
@@ -56,39 +54,7 @@ def simple_camera(camera, target_rect):
     _, _, w, h = camera      # w = width, h = height
     return pygame.Rect(-l+HALF_WIDTH, -t+HALF_HEIGHT, w, h)
 
-def load_tiles(layer):
-    collidables = []
-    entities = []
-
-    print("loading tiles...")
-    for x, y, gid in layer:
-        image = layer.parent.images[gid]
-        colliders = []
-        
-        if image is None:
-            continue
-
-        world_x, world_y = x * image.get_width(), y * image.get_height()
-        
-        static_renderer = Static(image, 0, 0, image.get_width(), image.get_height())
-        props = tiled_map.get_tile_properties_by_gid(gid)
-
-        if 'colliders' in props:
-            for raw in props['colliders']:
-                collidables.append(pygame.Rect(world_x + raw.x, world_y + raw.y, raw.width, raw.height))
-
-        tile = Tile(world_x, world_y, surface, static_renderer, colliders)
-        
-        if colliders:
-            collidables.append(tile)
-
-        entities.append(tile)
-    
-    return entities, collidables
-
-def load_player_data(layer):
-    
-    
+def load_player_data(layer):    
     for obj in layer:
         if obj.name == 'Start':
             start_pos = pygame.Vector2(obj.x,obj.y)
@@ -104,9 +70,7 @@ if __name__ == "__main__":
     font = pygame.font.Font(None, 24)
 
     last_millis = 0 
-    entities = []
     start_pos = None
-    collidables = []
 
     # TODO: move the code for loading the character skin to some place else
     hero_animations = {
@@ -122,51 +86,40 @@ if __name__ == "__main__":
     # - ground
     # - hills ( this layer will have collision)
     # - PlayerData
-    map_path = 'assets/tilesets/map-01.tmx'
-    tiled_map = load_map(map_path)
-    
-    for layer in tiled_map.layers:
+    map_path = local_file('assets/tilesets/map-01.tmx')
 
-        print("Loading layer %s..." % layer.name) 
-
-        if isinstance(layer, pytmx.TiledTileLayer):
-            new_entities, new_collidables = load_tiles(layer)
-            collidables += new_collidables
-            entities += new_entities
-
-        if layer.name == 'PlayerData':
-            start_pos = load_player_data(layer)
-        
-        print("---")
+    # TODO: the surfaces should not need to be passed through everywhere. add this to some for of Borg ojbect
+    game_map = GameMap(surface, map_path)
 
     print("Loading hero..")
     hero_img = 'assets/images/rpgsprites1/warrior_f.png'
     hero_animation = Animation(load_image(hero_img), 32, 36, hero_animations, random.randint(0, 1), 0.1)
     
-    if start_pos == None:
-        start_pos = pygame.Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2)
+    if game_map.start_pos == None:
+        game_map.start_pos = pygame.Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2)
 
-    hero  = Hero(start_pos, surface, hero_animation)
+    hero = Hero(game_map.start_pos, surface, hero_animation)
 
-    map_width = tiled_map.width * tiled_map.tilewidth
-    map_height = tiled_map.height * tiled_map.tileheight
-    camera = Camera(simple_camera, map_width, map_height)
-    entities.append(hero)
+    map_width = game_map.width * game_map.tilewidth
+    map_height = game_map.height * game_map.tileheight
 
-    aiSystem = AiSystem([entity.controller for entity in entities if entity.controller])
-    animationSystem = AnimationSystem([entity.renderer for entity in entities if entity.renderer])
-    graphicsSystem = GraphicsSystem(surface, [entity.graphics for entity in entities if entity.graphics], camera)
-    physicsSystem = PhysicsSystem([entity.physics for entity in entities if entity.physics], collidables)
+    # generate flow field
+    flow_pos = pygame.Vector2(0,0)
+    flow_size = pygame.Vector2(map_width, map_height)
+    flow_field = FlowField(surface, flow_pos, flow_size, game_map)
     
-    # tiles = [entity for entity in entities if entity != hero]
-    # worldView = WorldView(hero, [0, 0], SCREEN_SIZE, tiles, 32)
-    # hudView = HudView()
+    camera = Camera(simple_camera, map_width, map_height)
+    game_map.add_entity(hero)
 
+    aiSystem = AiSystem([entity.controller for entity in game_map.entities if entity.controller])
+    animationSystem = AnimationSystem([entity.renderer for entity in game_map.entities if entity.renderer])
+    graphicsSystem = GraphicsSystem(surface, [entity.graphics for entity in game_map.entities if entity.graphics], camera)
+    physicsSystem = PhysicsSystem([entity.physics for entity in game_map.entities if entity.physics], game_map.collidables)
+    
     # Order of this array is important. Entities move, we check collision and move the entities, etc.
     main_systems = [aiSystem, physicsSystem, animationSystem, graphicsSystem]
 
     # assign hero to camera
-
     camera_target = hero
 
     print("Stating game loop.")
@@ -178,11 +131,13 @@ if __name__ == "__main__":
 
         delta_time = last_millis / 1000
         
-        camera.update(camera_target)
+        camera.update(camera_target.rect)
         
         for control_system in main_systems:
             control_system.update(delta_time)
-       
+
+        flow_field.update(hero, camera)
+
         draw_debug(surface, font, hero)
         pygame.display.update()
 
